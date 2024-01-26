@@ -2,4 +2,4 @@ keys: SSH_KEY_FOR_SIGNING
 env:
   secret: “” # encrypted COSIGN_PASSWORD
 before_script: travis_key SSH_KEY_FOR_SIGNING cosign.key
-script: cosign sign --key cosign.key b3ac614bbd8befa4d41a901a23b1a89a9f0831e41f799c7b63b7020fb2a8198d
+script: cosign sign --key nginx:latest
