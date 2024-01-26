@@ -1,6 +1,5 @@
-os: linux
-rvm: 2.6.3
-jobs:
-  include:
-    - stage: "sleep 109"
-      script: sleep 10
+keys: SSH_KEY_FOR_SIGNING
+env:
+  secret: “...” # encrypted COSIGN_PASSWORD
+before_script: travis_key SSH_KEY_FOR_SIGNING cosign.key
+script: cosign sign --key cosign.key [image_identifier]
