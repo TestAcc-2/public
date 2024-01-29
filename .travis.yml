@@ -9,4 +9,4 @@ env:
     - secure: "encrypted_value_here"
 before_script: travis_key SSH_KEY_FOR_SIGNING cosign.key  
 script:
-  - cosign sign --key cosign.key --password $COSIGN_PASSWORD nginx:latest
+  - cosign sign --key cosign.key $COSIGN_PASSWORD nginx:latest
