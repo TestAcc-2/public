@@ -1,6 +1,9 @@
-os: linux
-rvm: 2.6.3
-jobs:
-  include:
-    - stage: "sleep 109"
-      script: sleep 10
+before_install:
+  curl -LO https://github.com/sigstore/cosign/releases/download/v1.0.0/cosign-linux-amd64
+  sudo mv cosign-linux-amd64 /usr/local/bin/cosign
+  sudo chmod +x /usr/local/bin/cosign
+keys: SSH_KEY_FOR_SIGNING # must match the key identifier set in the UI
+env:
+  secret: “”
+before_script: travis_key SSH_KEY_FOR_SIGNING cosign.key  
+script: cosign sign --key cosign.key nginx:latest
