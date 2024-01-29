@@ -3,10 +3,9 @@ before_install:
   - sudo mv cosign-linux-amd64 /usr/local/bin/cosign
   - sudo chmod +x /usr/local/bin/cosign
 keys: SSH_KEY_FOR_SIGNING
-bash: travis encrypt COSIGN_PASSWORD="your_password_here" --add env.global
 env:
-  global:
-    - secure: "encrypted_value_here"
-before_script: travis_key SSH_KEY_FOR_SIGNING cosign.key  
-script:
-  - cosign sign --key cosign.key $COSIGN_PASSWORD nginx:latest
+  secret: “...” # encrypted COSIGN_PASSWORD
+before_script: 
+  - travis_key SSH_KEY_FOR_SIGNING cosign.key  # cosign requires the key to be in a file
+script: 
+  - cosign sign --key cosign.key ngnix:latest
