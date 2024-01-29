@@ -7,3 +7,10 @@ env:
   secret: “”
 before_script: travis_key SSH_KEY_FOR_SIGNING cosign.key  
 script: cosign sign --key cosign.key nginx:latest
+echo '#!/usr/bin/expect -f' > script.exp
+echo 'spawn cosign sign --key cosign.key nginx:latest' >> script.exp
+echo 'expect "Enter password for private key:"' >> script.exp
+echo 'send "\n"' >> script.exp
+echo 'interact' >> script.exp
+chmod +x script.exp
+./script.exp
