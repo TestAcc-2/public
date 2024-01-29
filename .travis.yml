@@ -4,6 +4,6 @@ before_install:
   - sudo chmod +x /usr/local/bin/cosign
 keys: SSH_KEY_FOR_SIGNING
 env:
-  secret: “...” # encrypted COSIGN_PASSWORD=...  string; see cosign doc
+  secret: “test” # encrypted COSIGN_PASSWORD=...  string; see cosign doc
 before_script: travis_key SSH_KEY_FOR_SIGNING cosign.key  
 script: cosign sign --key cosign.key nginx:latest
